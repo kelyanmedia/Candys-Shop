@@ -537,7 +537,7 @@ input[type="date"].input { display: block; min-width: 0; line-height: 1.4; }
 .cc-code { font-variant-numeric: tabular-nums; font-weight: 500; }
 .cc-arrow { width: 7px; height: 7px; margin: -3px 0 0 2px; border: solid var(--muted); border-width: 0 2px 2px 0; transform: rotate(45deg); }
 .cc-panel {
-  position: absolute; z-index: 30; left: 0; top: calc(100% + 8px); width: min(380px, 100%);
+  position: absolute; z-index: 30; left: 0; top: calc(100% + 8px); width: min(380px, 100%); max-width: 100%;
   background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 10px;
   box-shadow: 0 24px 60px rgba(26,20,36,.22);
 }
@@ -678,8 +678,8 @@ input[type="date"].input { display: block; min-width: 0; line-height: 1.4; }
   .reaction-emoji { width: 44px; font-size: 36px; }
   .label-line { align-items: flex-start; flex-direction: column; }
   .cc-btn { padding: 0 10px; gap: 6px; }
-  .cc-panel { position: fixed; left: 12px; right: 12px; top: auto; bottom: 12px; width: auto; z-index: 120; }
-  .cc-list { max-height: 46vh; }
+  .cc-panel { width: 100%; }
+  .cc-list { max-height: 232px; }
   .btn-submit { width: 100%; }
   .form-footer { flex-direction: column; align-items: stretch; text-align: center; }
 

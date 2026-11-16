@@ -229,3 +229,56 @@ Object.assign(I18N.uz, {
 I18N.ru["products.credits"] = "Фото категорий: Wikimedia Commons — Drejwen (CC BY 4.0), Ekaterina Kvelidze (CC BY-SA 4.0), Kuwanishbek, piviso.com, MirfayzbekAbdullayev (CC0).";
 I18N.en["products.credits"] = "Category photos: Wikimedia Commons — Drejwen (CC BY 4.0), Ekaterina Kvelidze (CC BY-SA 4.0), Kuwanishbek, piviso.com, MirfayzbekAbdullayev (CC0).";
 I18N.uz["products.credits"] = "Kategoriya suratlari: Wikimedia Commons — Drejwen (CC BY 4.0), Ekaterina Kvelidze (CC BY-SA 4.0), Kuwanishbek, piviso.com, MirfayzbekAbdullayev (CC0).";
+
+/* ---------- Блок «Подробности»: тексты зависят от оценки (low 0–6, mid 7–8, high 9–10) ---------- */
+Object.assign(I18N.ru, {
+  "fb.d.low.chips": "Что вас расстроило?",
+  "fb.d.low.dis": "Что именно пошло не так?",
+  "fb.d.low.dis.ph": "Расскажите подробнее — мы разберёмся и всё исправим…",
+  "fb.d.low.imp": "Что нам сделать, чтобы вы вернулись?",
+  "fb.d.low.imp.ph": "Любое предложение поможет нам стать лучше",
+  "fb.d.mid.chips": "Что вам понравилось?",
+  "fb.d.mid.dis": "Что можно сделать лучше?",
+  "fb.d.mid.dis.ph": "Что не дотянуло до идеала?",
+  "fb.d.mid.imp": "Ваша идея для нас",
+  "fb.d.mid.imp.ph": "Чего вам не хватило? Какой вкус или набор добавить?",
+  "fb.d.high.chips": "Что вам особенно понравилось?",
+  "fb.d.high.dis": "Что могло бы быть ещё лучше?",
+  "fb.d.high.dis.ph": "Даже мелочи помогают нам расти — если есть, напишите",
+  "fb.d.high.imp": "Что вам хотелось бы увидеть у нас ещё?",
+  "fb.d.high.imp.ph": "Новый вкус, набор, формат — всё, о чём мечтаете"
+});
+Object.assign(I18N.en, {
+  "fb.d.low.chips": "What upset you?",
+  "fb.d.low.dis": "What exactly went wrong?",
+  "fb.d.low.dis.ph": "Tell us more — we'll look into it and put it right…",
+  "fb.d.low.imp": "What can we do to win you back?",
+  "fb.d.low.imp.ph": "Any suggestion helps us get better",
+  "fb.d.mid.chips": "What did you like?",
+  "fb.d.mid.dis": "What could be better?",
+  "fb.d.mid.dis.ph": "What fell short of perfect?",
+  "fb.d.mid.imp": "Your idea for us",
+  "fb.d.mid.imp.ph": "What was missing? Which flavour or gift set should we add?",
+  "fb.d.high.chips": "What did you like the most?",
+  "fb.d.high.dis": "What could be even better?",
+  "fb.d.high.dis.ph": "Even small things help us grow — write if there are any",
+  "fb.d.high.imp": "What else would you like to see from us?",
+  "fb.d.high.imp.ph": "A new flavour, set or format — anything you dream of"
+});
+Object.assign(I18N.uz, {
+  "fb.d.low.chips": "Sizni nima xafa qildi?",
+  "fb.d.low.dis": "Aynan nima noto‘g‘ri bo‘ldi?",
+  "fb.d.low.dis.ph": "Batafsilroq yozing — ko‘rib chiqamiz va hammasini tuzatamiz…",
+  "fb.d.low.imp": "Qaytib kelishingiz uchun nima qilaylik?",
+  "fb.d.low.imp.ph": "Har qanday taklif bizga yaxshiroq bo‘lishga yordam beradi",
+  "fb.d.mid.chips": "Sizga nima yoqdi?",
+  "fb.d.mid.dis": "Nimani yaxshilash mumkin?",
+  "fb.d.mid.dis.ph": "Nima mukammallikka yetmadi?",
+  "fb.d.mid.imp": "Biz uchun g‘oyangiz",
+  "fb.d.mid.imp.ph": "Nima yetishmadi? Qaysi ta’m yoki sovg‘a to‘plamini qo‘shaylik?",
+  "fb.d.high.chips": "Sizga ayniqsa nima yoqdi?",
+  "fb.d.high.dis": "Nima yanada yaxshi bo‘lishi mumkin edi?",
+  "fb.d.high.dis.ph": "Mayda narsalar ham o‘sishimizga yordam beradi — bo‘lsa, yozing",
+  "fb.d.high.imp": "Yana nimani ko‘rishni xohlardingiz?",
+  "fb.d.high.imp.ph": "Yangi ta’m, to‘plam, format — orzu qilgan hamma narsa"
+});

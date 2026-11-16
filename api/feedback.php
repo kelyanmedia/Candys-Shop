@@ -55,7 +55,9 @@ function clean($v, int $max): string {
 }
 
 $name     = clean($in['name'] ?? '', 100);
-$contact  = clean($in['contact'] ?? '', 100);
+$phone    = preg_replace('/[^\d+\s()\-]/', '', clean($in['phone'] ?? ($in['contact'] ?? ''), 40)) ?? '';
+$email    = clean($in['email'] ?? '', 100);
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $email = '';
 $disliked = clean($in['disliked'] ?? '', 1500);
 $improve  = clean($in['improve'] ?? '', 1500);
 $lang     = in_array($in['lang'] ?? '', ['ru', 'en', 'uz'], true) ? $in['lang'] : 'ru';
@@ -97,11 +99,13 @@ $lines = [
     "{$mark} <b>Оценка: {$rating}/10</b> " . ['😡','😠','😞','😕','😟','😐','🙂','😊','😄','🤩','🥳'][$rating] . " ({$group})",
 ];
 if ($name !== '')    $lines[] = '👤 <b>Имя:</b> ' . $e($name);
-if ($contact !== '') $lines[] = '📞 <b>Контакт:</b> ' . $e($contact);
+if ($phone !== '')   $lines[] = '📞 <b>Телефон:</b> ' . $e($phone);
+if ($email !== '')   $lines[] = '✉️ <b>E-mail:</b> ' . $e($email);
 if ($date !== '')    $lines[] = '📅 <b>Дата визита:</b> ' . $e(date('d.m.Y', strtotime($date)));
-if ($liked)          $lines[] = '👍 <b>Понравилось:</b> ' . $e(implode(', ', $liked));
-if ($disliked !== '') { $lines[] = ''; $lines[] = '👎 <b>Не понравилось:</b>'; $lines[] = $e($disliked); }
-if ($improve !== '')  { $lines[] = ''; $lines[] = '💡 <b>Как стать лучше:</b>'; $lines[] = $e($improve); }
+$low = $rating <= 6;
+if ($liked)          $lines[] = ($low ? '👎 <b>Что расстроило:</b> ' : '👍 <b>Понравилось:</b> ') . $e(implode(', ', $liked));
+if ($disliked !== '') { $lines[] = ''; $lines[] = $low ? '😕 <b>Что пошло не так:</b>' : '🔧 <b>Что можно улучшить:</b>'; $lines[] = $e($disliked); }
+if ($improve !== '')  { $lines[] = ''; $lines[] = $low ? '🤝 <b>Что сделать, чтобы вернулись:</b>' : '💡 <b>Идея / пожелание:</b>'; $lines[] = $e($improve); }
 $lines[] = '';
 $lines[] = '🌐 Язык сайта: ' . strtoupper($lang);
 $text = implode("\n", $lines);

@@ -79,19 +79,34 @@ document.addEventListener("DOMContentLoaded", () => {
       rEmoji.classList.remove("pop"); void rEmoji.offsetWidth; rEmoji.classList.add("pop");
     }
   }
-  ratingBox.addEventListener("change", () => { ratingError.classList.remove("show"); updateReaction(true); });
+  /* ---- Блок «Подробности» подстраивается под оценку ---- */
+  const ratingGroup = n => n <= 6 ? "low" : n <= 8 ? "mid" : "high";
+  const SECTION3 = [
+    ["q-chips", "data-i18n", "fb.liked"], ["l-disliked", "data-i18n", "fb.disliked"], ["l-improve", "data-i18n", "fb.improve"],
+    ["fb-disliked", "data-i18n-placeholder", "fb.disliked.ph"], ["fb-improve", "data-i18n-placeholder", "fb.improve.ph"]
+  ];
+  function updateSection3() {
+    const checked = form.querySelector('input[name="rating"]:checked');
+    const g = checked ? ratingGroup(+checked.value) : null;
+    const keys = g
+      ? ["fb.d." + g + ".chips", "fb.d." + g + ".dis", "fb.d." + g + ".imp", "fb.d." + g + ".dis.ph", "fb.d." + g + ".imp.ph"]
+      : SECTION3.map(x => x[2]);
+    SECTION3.forEach(([id, attr], i) => document.getElementById(id).setAttribute(attr, keys[i]));
+    applyI18n();
+    form.dataset.group = g || "";
+  }
+  ratingBox.addEventListener("change", () => { ratingError.classList.remove("show"); updateReaction(true); updateSection3(); });
 
   /* ======================= Контакт: телефон / e-mail ======================= */
-  const tabs = document.querySelectorAll("#contact-tabs button");
   const phoneBox = document.getElementById("phone-box");
   const phoneInput = document.getElementById("fb-phone");
   const emailInput = document.getElementById("fb-email");
-  const contactError = document.getElementById("contact-error");
+  const phoneError = document.getElementById("phone-error");
+  const emailError = document.getElementById("email-error");
   const ccBtn = document.getElementById("cc-btn");
   const ccPanel = document.getElementById("cc-panel");
   const ccSearch = document.getElementById("cc-search");
   const ccList = document.getElementById("cc-list");
-  let contactType = "phone";
   let country = COUNTRIES[0];
 
   const maskOf = c => c.mask || GENERIC_MASK;
@@ -114,8 +129,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("cc-code").textContent = "+" + c.dial;
     const digits = phoneInput.value.replace(/\D/g, "").slice(0, maxDigits(c));
     phoneInput.value = formatNational(digits, c);
-    phoneInput.placeholder = maskOf(c).replace(/#/g, "0");
-    contactError.classList.remove("show");
+    { let k = 0; const sample = "9012345678901234"; phoneInput.placeholder = maskOf(c).replace(/#/g, () => sample[k++ % sample.length]); }
+    phoneError.classList.remove("show");
     if (keepFocus) phoneInput.focus();
   }
 
@@ -144,7 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
       while (pos < phoneInput.value.length && seen < caretDigits) { if (/\d/.test(phoneInput.value[pos])) seen++; pos++; }
       phoneInput.setSelectionRange(pos, pos);
     }
-    contactError.classList.remove("show");
+    phoneError.classList.remove("show");
   });
 
   /* Выбор страны */
@@ -175,29 +190,18 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", e => { if (!ccPanel.hidden && !phoneBox.contains(e.target)) openPanel(false); });
   document.addEventListener("keydown", e => { if (e.key === "Escape" && !ccPanel.hidden) { openPanel(false); ccBtn.focus(); } });
 
-  /* Переключатель Телефон / E-mail */
-  function setContactType(type) {
-    contactType = type;
-    tabs.forEach(b => b.setAttribute("aria-selected", String(b.dataset.type === type)));
-    phoneBox.hidden = type !== "phone";
-    emailInput.hidden = type !== "email";
-    contactError.classList.remove("show");
-    openPanel(false);
-  }
-  tabs.forEach(b => b.addEventListener("click", () => setContactType(b.dataset.type)));
-  emailInput.addEventListener("input", () => contactError.classList.remove("show"));
+  emailInput.addEventListener("input", () => emailError.classList.remove("show"));
 
-  /* Возвращает { value, error } */
-  function readContact() {
-    if (contactType === "email") {
-      const v = emailInput.value.trim();
-      if (!v) return { value: "" };
-      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? { value: v } : { error: "fb.err.contact.email" };
-    }
+  function readPhone() {
     const digits = phoneInput.value.replace(/\D/g, "");
     if (!digits) return { value: "" };
     const ok = country.len ? digits.length === country.len : digits.length >= 6;
     return ok ? { value: `+${country.dial} ${phoneInput.value.trim()}` } : { error: "fb.err.contact.phone" };
+  }
+  function readEmail() {
+    const v = emailInput.value.trim();
+    if (!v) return { value: "" };
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? { value: v } : { error: "fb.err.contact.email" };
   }
 
   /* ======================= Дата ======================= */
@@ -220,11 +224,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const fd = new FormData(form);
     sendError.classList.remove("show");
 
-    const contact = readContact();
-    if (contact.error) {
-      contactError.textContent = t(contact.error);
-      contactError.classList.add("show");
-      (contactType === "email" ? emailInput : phoneInput).focus();
+    const phone = readPhone(), email = readEmail();
+    phoneError.classList.toggle("show", !!phone.error);
+    emailError.classList.toggle("show", !!email.error);
+    if (phone.error) phoneError.textContent = t(phone.error);
+    if (email.error) emailError.textContent = t(email.error);
+    if (phone.error || email.error) {
+      (phone.error ? phoneInput : emailInput).focus();
       return;
     }
     if (!fd.get("rating")) {
@@ -235,7 +241,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const payload = {
       name: (fd.get("name") || "").trim(),
-      contact: contact.value,
+      phone: phone.value,
+      email: email.value,
+      mode: ratingGroup(Number(fd.get("rating"))) === "low" ? "disliked" : "liked",
       date: fd.get("date"),
       rating: Number(fd.get("rating")),
       liked: fd.getAll("liked"),

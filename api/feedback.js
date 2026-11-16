@@ -37,7 +37,9 @@ module.exports = async (req, res) => {
   const recent = (hits.get(ip) || []).filter((t) => t > now - 600000);
   if (recent.length >= 5) return send(429, { ok: false, error: "too_many_requests" });
 
-  const name = clean(inp.name, 100), contact = clean(inp.contact, 100);
+  const name = clean(inp.name, 100);
+  const phone = clean(inp.phone || inp.contact, 40).replace(/[^\d+\s()\-]/g, "");
+  const email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean(inp.email, 100)) ? clean(inp.email, 100) : "";
   const disliked = clean(inp.disliked, 1500), improve = clean(inp.improve, 1500);
   const lang = ["ru", "en", "uz"].includes(inp.lang) ? inp.lang : "ru";
   let date = clean(inp.date, 10);
@@ -47,11 +49,14 @@ module.exports = async (req, res) => {
   const [mark, group] = rating >= 9 ? ["🟢", "промоутер"] : rating >= 7 ? ["🟡", "нейтрал"] : ["🔴", "критик"];
   const lines = ["<b>🍯 Новый отзыв — Uzbek Halva &amp; Dry Fruits</b>", "", `${mark} <b>Оценка: ${rating}/10</b> ${EMOJI[rating]} (${group})`];
   if (name) lines.push("👤 <b>Имя:</b> " + esc(name));
-  if (contact) lines.push("📞 <b>Контакт:</b> " + esc(contact));
+  if (phone) lines.push("📞 <b>Телефон:</b> " + esc(phone));
+  if (email) lines.push("✉️ <b>E-mail:</b> " + esc(email));
   if (date) lines.push("📅 <b>Дата визита:</b> " + date.split("-").reverse().join("."));
-  if (liked.length) lines.push("👍 <b>Понравилось:</b> " + esc(liked.join(", ")));
-  if (disliked) lines.push("", "👎 <b>Не понравилось:</b>", esc(disliked));
-  if (improve) lines.push("", "💡 <b>Как стать лучше:</b>", esc(improve));
+  // Подписи зависят от оценки: так же, как тексты в форме
+  const low = rating <= 6;
+  if (liked.length) lines.push(low ? "👎 <b>Что расстроило:</b> " + esc(liked.join(", ")) : "👍 <b>Понравилось:</b> " + esc(liked.join(", ")));
+  if (disliked) lines.push("", low ? "😕 <b>Что пошло не так:</b>" : "🔧 <b>Что можно улучшить:</b>", esc(disliked));
+  if (improve) lines.push("", low ? "🤝 <b>Что сделать, чтобы вернулись:</b>" : "💡 <b>Идея / пожелание:</b>", esc(improve));
   lines.push("", "🌐 Язык сайта: " + lang.toUpperCase());
 
   try {

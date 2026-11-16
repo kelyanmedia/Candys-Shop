@@ -84,14 +84,8 @@
             <label for="fb-name" data-i18n="fb.name">Как к вам обращаться?</label>
             <input class="input" id="fb-name" name="name" type="text" autocomplete="name" maxlength="100" data-i18n-placeholder="fb.name.ph" placeholder="Ваше имя">
           </div>
-          <div class="field" id="contact-field">
-            <div class="label-line">
-              <span class="q"><span data-i18n="fb.contact">Как с вами связаться</span> <span class="hint" data-i18n="fb.optional">необязательно</span></span>
-              <div class="seg" role="tablist" id="contact-tabs">
-                <button type="button" role="tab" data-type="phone" aria-selected="true" data-i18n="fb.contact.phone">Телефон</button>
-                <button type="button" role="tab" data-type="email" aria-selected="false" data-i18n="fb.contact.email">E-mail</button>
-              </div>
-            </div>
+          <div class="field" id="phone-field">
+            <label for="fb-phone"><span data-i18n="fb.contact.phone">Телефон</span> <span class="hint" data-i18n="fb.optional">необязательно</span></label>
             <div class="phone-box" id="phone-box">
               <button class="cc-btn" type="button" id="cc-btn" aria-haspopup="listbox" aria-expanded="false" data-i18n-aria="fb.country" aria-label="Страна">
                 <span class="cc-flag" id="cc-flag"></span><span class="cc-code" id="cc-code"></span><span class="cc-arrow" aria-hidden="true"></span>
@@ -102,8 +96,12 @@
                 <ul class="cc-list" id="cc-list" role="listbox"></ul>
               </div>
             </div>
-            <input class="input" id="fb-email" type="email" inputmode="email" autocomplete="email" maxlength="100" hidden data-i18n-placeholder="fb.contact.ph.email" placeholder="name@example.com">
-            <div class="form-error" id="contact-error"></div>
+            <div class="form-error" id="phone-error"></div>
+          </div>
+          <div class="field" id="email-field">
+            <label for="fb-email"><span data-i18n="fb.contact.email">E-mail</span> <span class="hint" data-i18n="fb.optional">необязательно</span></label>
+            <input class="input" id="fb-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="100" data-i18n-placeholder="fb.contact.ph.email" placeholder="name@example.com">
+            <div class="form-error" id="email-error"></div>
           </div>
           <div class="field">
             <label for="fb-date" data-i18n="fb.date">Когда вы к нам заходили?</label>
@@ -128,7 +126,7 @@
         <fieldset class="form-section">
           <div class="form-section-title"><span class="num">03</span><h2 data-i18n="fb.s3">Подробности</h2></div>
           <div class="field">
-            <span class="q"><span data-i18n="fb.liked">Что вам особенно понравилось?</span> <span class="hint" data-i18n="fb.c.hint">Можно выбрать несколько</span></span>
+            <span class="q"><span id="q-chips" data-i18n="fb.liked">Что вам особенно понравилось?</span> <span class="hint" data-i18n="fb.c.hint">Можно выбрать несколько</span></span>
             <div class="chips">
               <input type="checkbox" id="c-taste" name="liked" value="taste"><label for="c-taste"><span aria-hidden="true">🍯</span> <span data-i18n="fb.c.taste">Вкус</span></label>
               <input type="checkbox" id="c-range" name="liked" value="range"><label for="c-range"><span aria-hidden="true">🥜</span> <span data-i18n="fb.c.range">Ассортимент</span></label>
@@ -139,11 +137,11 @@
             </div>
           </div>
           <div class="field">
-            <label for="fb-disliked" data-i18n="fb.disliked">Что можно сделать лучше?</label>
+            <label for="fb-disliked" id="l-disliked" data-i18n="fb.disliked">Что можно сделать лучше?</label>
             <textarea class="textarea" id="fb-disliked" name="disliked" maxlength="1500" data-i18n-placeholder="fb.disliked.ph" placeholder="Расскажите, что огорчило или удивило не в ту сторону…"></textarea>
           </div>
           <div class="field">
-            <label for="fb-improve" data-i18n="fb.improve">Ваша идея для нас</label>
+            <label for="fb-improve" id="l-improve" data-i18n="fb.improve">Ваша идея для нас</label>
             <textarea class="textarea" id="fb-improve" name="improve" maxlength="1500" data-i18n-placeholder="fb.improve.ph" placeholder="Чего вам не хватило? Какой вкус или набор добавить?"></textarea>
           </div>
         </fieldset>
