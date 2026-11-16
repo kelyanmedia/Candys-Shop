@@ -44,7 +44,15 @@
 ## Локальный запуск
 
 ```bash
-php -S localhost:8000
+php -S localhost:8000 router.php
 ```
 
 Затем откройте http://localhost:8000. Без PHP (например, через `python3 -m http.server`) сайт откроется, но форма отзыва выдаст ошибку отправки.
+
+## Что важно знать (обновление)
+
+- **Адреса без `.html`**: на Vercel включены чистые URL (`/about`, `/products`, `/feedback`, `/thanks`). Для локального запуска используйте роутер: `php -S localhost:8000 router.php`.
+- **Отправка отзывов на Vercel**: форма шлёт запрос на `/api/feedback.php`, Vercel перенаправляет его на serverless-функцию `api/feedback.js` (Node). PHP-вариант остаётся для обычного хостинга.
+- **SEO**: мета-теги, Open Graph, JSON-LD, русский текст, шапка и подвал вшиваются в HTML командой `node scripts/prerender.js` — запускайте её после правок текстов (`assets/js/i18n.js`, `assets/js/extra-i18n.js`), шапки/подвала (`assets/js/layout.js`) или самих страниц. Она же обновляет `sitemap.xml` и `robots.txt`.
+- **Страницы**: `thanks.html` («Спасибо» после отправки формы) и `404.html` (своя страница ошибки).
+- **Фото категорий** — Wikimedia Commons, авторы и лицензии в `assets/img/CREDITS.md`.

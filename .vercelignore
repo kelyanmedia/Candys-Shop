@@ -1,3 +1,7 @@
 api/config.php
-api/feedback.php
 api/config.example.php
+api/feedback.php
+api/.htaccess
+router.php
+scripts
+README.md

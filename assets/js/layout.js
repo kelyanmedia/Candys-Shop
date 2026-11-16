@@ -2,22 +2,14 @@
    Shared header and footer, language switch, mobile menu.
    ========================================================= */
 
-/* ⚠️ Контакты — заменить на реальные перед запуском */
-const SITE = {
-  phone: "+998 00 000 00 00",
-  phoneHref: "tel:+998000000000",
-  telegram: "https://t.me/",
-  instagram: "https://instagram.com/"
-};
-
 const PAGES = [
-  { id: "home", href: "index.html", key: "nav.home" },
-  { id: "about", href: "about.html", key: "nav.about" },
-  { id: "products", href: "products.html", key: "nav.products" },
-  { id: "feedback", href: "feedback.html", key: "nav.feedback" }
+  { id: "home", href: "/", key: "nav.home" },
+  { id: "about", href: "/about", key: "nav.about" },
+  { id: "products", href: "/products", key: "nav.products" },
+  { id: "feedback", href: "/feedback", key: "nav.feedback" }
 ];
 
-const BRAND = `<a class="brand" href="index.html">
+const BRAND = `<a class="brand" href="/">
     <strong>UZBEK HALVA &amp; DRY FRUITS</strong>
     <small data-i18n="brand.tag"></small>
   </a>`;
@@ -44,8 +36,7 @@ function renderHeader(page) {
         </div>
         <div class="nav-extra">
           <p class="loc" data-i18n="common.location"></p>
-          <a class="phone" href="${SITE.phoneHref}">${SITE.phone}</a>
-          <p class="socials"><a href="${SITE.telegram}" target="_blank" rel="noopener">Telegram</a><i aria-hidden="true"></i><a href="${SITE.instagram}" target="_blank" rel="noopener">Instagram</a></p>
+          <a class="btn btn-light nav-cta" href="/feedback" data-i18n="home.fb.btn"></a>
         </div>
         <div class="atlas" aria-hidden="true"></div>
       </nav>
@@ -71,28 +62,25 @@ function renderFooter() {
         <p data-i18n="footer.cta.text"></p>
       </div>
       <div class="footer-contact">
-        <a class="phone" href="${SITE.phoneHref}">${SITE.phone}</a>
-        <div class="pills">
-          <a class="pill" href="${SITE.telegram}" target="_blank" rel="noopener">Telegram</a>
-          <a class="pill" href="${SITE.instagram}" target="_blank" rel="noopener">Instagram</a>
-        </div>
+        <a class="btn btn-light" href="/feedback" data-i18n="home.fb.btn"></a>
+        <a class="btn btn-line-light" href="/products" data-i18n="home.hero.btn1"></a>
       </div>
     </div>
     <div class="container footer-top">
-      <div>
+      <div class="footer-about">
         ${BRAND}
         <p data-i18n="footer.about"></p>
         <p class="footer-proverb"><strong lang="uz">«Mehmon otangdan ulug‘»</strong><span data-i18n="footer.proverb"></span></p>
       </div>
-      <div>
+      <nav aria-label="Footer">
         <h4 data-i18n="footer.pages"></h4>
         <ul>${links}</ul>
-      </div>
+      </nav>
       <div>
         <h4 data-i18n="footer.contacts"></h4>
-        <ul>
-          <li data-i18n="footer.address"></li>
-          <li data-i18n="footer.hours"></li>
+        <ul class="footer-info">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span data-i18n="footer.address"></span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-i18n="footer.hours"></span></li>
         </ul>
       </div>
     </div>
@@ -104,19 +92,10 @@ function renderFooter() {
   </footer>`;
 }
 
-/* Links marked data-site="phone|telegram|instagram" get real URLs from SITE */
-function fillSiteLinks() {
-  document.querySelectorAll("[data-site]").forEach(el => {
-    const k = el.dataset.site;
-    el.href = k === "phone" ? SITE.phoneHref : SITE[k];
-    if (el.hasAttribute("data-site-text")) el.textContent = SITE[k];
-  });
-}
-
 function initLayout() {
-  document.body.insertAdjacentHTML("afterbegin", renderHeader(document.body.dataset.page));
-  document.body.insertAdjacentHTML("beforeend", renderFooter());
-  fillSiteLinks();
+  // Шапка и подвал уже вставлены в HTML при сборке (prerender) — повторно не добавляем
+  if (!document.querySelector(".site-header")) document.body.insertAdjacentHTML("afterbegin", renderHeader(document.body.dataset.page));
+  if (!document.querySelector(".site-footer")) document.body.insertAdjacentHTML("beforeend", renderFooter());
 
   document.querySelectorAll(".lang-switch button").forEach(btn =>
     btn.addEventListener("click", () => setLang(btn.dataset.lang)));

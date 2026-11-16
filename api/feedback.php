@@ -94,7 +94,7 @@ else                   { $mark = '🔴'; $group = 'критик'; }
 $lines = [
     '<b>🍯 Новый отзыв — Uzbek Halva &amp; Dry Fruits</b>',
     '',
-    "{$mark} <b>Оценка: {$rating}/10</b> ({$group})",
+    "{$mark} <b>Оценка: {$rating}/10</b> " . ['😡','😠','😞','😕','😟','😐','🙂','😊','😄','🤩','🥳'][$rating] . " ({$group})",
 ];
 if ($name !== '')    $lines[] = '👤 <b>Имя:</b> ' . $e($name);
 if ($contact !== '') $lines[] = '📞 <b>Контакт:</b> ' . $e($contact);

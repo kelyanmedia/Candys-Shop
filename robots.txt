@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /thanks
+
+Sitemap: https://www.uzbekfruitsairport.uz/sitemap.xml

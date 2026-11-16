@@ -1,11 +1,12 @@
 /*
  * Vercel serverless-версия api/feedback.php: принимает отзыв и пересылает в Telegram.
- * Токен и chat_id берутся из переменных окружения Vercel: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID.
+ * Токен и chat_id можно переопределить переменными окружения Vercel: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID.
  */
 const LIKED = {
   taste: "Вкус", range: "Ассортимент", packaging: "Упаковка",
   service: "Обслуживание", price: "Цены", atmosphere: "Атмосфера",
 };
+const EMOJI = ["😡", "😠", "😞", "😕", "😟", "😐", "🙂", "😊", "😄", "🤩", "🥳"];
 const hits = new Map(); // простой лимит на инстанс: 5 отзывов / 10 минут с IP
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const clean = (v, max) =>
@@ -16,8 +17,9 @@ module.exports = async (req, res) => {
   const send = (code, data) => res.status(code).send(JSON.stringify(data));
 
   if (req.method !== "POST") return send(405, { ok: false, error: "method_not_allowed" });
-  const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  // Переменные окружения Vercel (если заданы) важнее значений по умолчанию
+  const token = process.env.TELEGRAM_BOT_TOKEN || "8622268593:AAF8WEuJgIsObPmibCIqnWuxJfsSr9hHm_M";
+  const chatId = process.env.TELEGRAM_CHAT_ID || "-5533858706";
   if (!token || !chatId) return send(500, { ok: false, error: "not_configured" });
 
   let inp = req.body;
@@ -43,7 +45,7 @@ module.exports = async (req, res) => {
   const liked = [...new Set((Array.isArray(inp.liked) ? inp.liked : []).filter((k) => LIKED[k]).map((k) => LIKED[k]))];
 
   const [mark, group] = rating >= 9 ? ["🟢", "промоутер"] : rating >= 7 ? ["🟡", "нейтрал"] : ["🔴", "критик"];
-  const lines = ["<b>🍯 Новый отзыв — Uzbek Halva &amp; Dry Fruits</b>", "", `${mark} <b>Оценка: ${rating}/10</b> (${group})`];
+  const lines = ["<b>🍯 Новый отзыв — Uzbek Halva &amp; Dry Fruits</b>", "", `${mark} <b>Оценка: ${rating}/10</b> ${EMOJI[rating]} (${group})`];
   if (name) lines.push("👤 <b>Имя:</b> " + esc(name));
   if (contact) lines.push("📞 <b>Контакт:</b> " + esc(contact));
   if (date) lines.push("📅 <b>Дата визита:</b> " + date.split("-").reverse().join("."));
