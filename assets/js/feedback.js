@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
   /* ---- Блок «Подробности» подстраивается под оценку ---- */
-  const ratingGroup = n => n <= 6 ? "low" : n <= 8 ? "mid" : "high";
+  const ratingGroup = n => n <= 4 ? "low" : n <= 8 ? "mid" : "high";  // ниже 5 — «что не понравилось»
   const SECTION3 = [
     ["q-chips", "data-i18n", "fb.liked"], ["l-disliked", "data-i18n", "fb.disliked"], ["l-improve", "data-i18n", "fb.improve"],
     ["fb-disliked", "data-i18n-placeholder", "fb.disliked.ph"], ["fb-improve", "data-i18n-placeholder", "fb.improve.ph"]

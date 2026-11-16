@@ -53,8 +53,8 @@ module.exports = async (req, res) => {
   if (email) lines.push("✉️ <b>E-mail:</b> " + esc(email));
   if (date) lines.push("📅 <b>Дата визита:</b> " + date.split("-").reverse().join("."));
   // Подписи зависят от оценки: так же, как тексты в форме
-  const low = rating <= 6;
-  if (liked.length) lines.push(low ? "👎 <b>Что расстроило:</b> " + esc(liked.join(", ")) : "👍 <b>Понравилось:</b> " + esc(liked.join(", ")));
+  const low = rating <= 4;
+  if (liked.length) lines.push(low ? "👎 <b>Что не понравилось:</b> " + esc(liked.join(", ")) : "👍 <b>Понравилось:</b> " + esc(liked.join(", ")));
   if (disliked) lines.push("", low ? "😕 <b>Что пошло не так:</b>" : "🔧 <b>Что можно улучшить:</b>", esc(disliked));
   if (improve) lines.push("", low ? "🤝 <b>Что сделать, чтобы вернулись:</b>" : "💡 <b>Идея / пожелание:</b>", esc(improve));
   lines.push("", "🌐 Язык сайта: " + lang.toUpperCase());

@@ -102,8 +102,8 @@ if ($name !== '')    $lines[] = '👤 <b>Имя:</b> ' . $e($name);
 if ($phone !== '')   $lines[] = '📞 <b>Телефон:</b> ' . $e($phone);
 if ($email !== '')   $lines[] = '✉️ <b>E-mail:</b> ' . $e($email);
 if ($date !== '')    $lines[] = '📅 <b>Дата визита:</b> ' . $e(date('d.m.Y', strtotime($date)));
-$low = $rating <= 6;
-if ($liked)          $lines[] = ($low ? '👎 <b>Что расстроило:</b> ' : '👍 <b>Понравилось:</b> ') . $e(implode(', ', $liked));
+$low = $rating <= 4;
+if ($liked)          $lines[] = ($low ? '👎 <b>Что не понравилось:</b> ' : '👍 <b>Понравилось:</b> ') . $e(implode(', ', $liked));
 if ($disliked !== '') { $lines[] = ''; $lines[] = $low ? '😕 <b>Что пошло не так:</b>' : '🔧 <b>Что можно улучшить:</b>'; $lines[] = $e($disliked); }
 if ($improve !== '')  { $lines[] = ''; $lines[] = $low ? '🤝 <b>Что сделать, чтобы вернулись:</b>' : '💡 <b>Идея / пожелание:</b>'; $lines[] = $e($improve); }
 $lines[] = '';

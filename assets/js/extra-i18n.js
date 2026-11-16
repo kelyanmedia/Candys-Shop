@@ -232,7 +232,7 @@ I18N.uz["products.credits"] = "Kategoriya suratlari: Wikimedia Commons — Drejw
 
 /* ---------- Блок «Подробности»: тексты зависят от оценки (low 0–6, mid 7–8, high 9–10) ---------- */
 Object.assign(I18N.ru, {
-  "fb.d.low.chips": "Что вас расстроило?",
+  "fb.d.low.chips": "Что не понравилось?",
   "fb.d.low.dis": "Что именно пошло не так?",
   "fb.d.low.dis.ph": "Расскажите подробнее — мы разберёмся и всё исправим…",
   "fb.d.low.imp": "Что нам сделать, чтобы вы вернулись?",
@@ -249,7 +249,7 @@ Object.assign(I18N.ru, {
   "fb.d.high.imp.ph": "Новый вкус, набор, формат — всё, о чём мечтаете"
 });
 Object.assign(I18N.en, {
-  "fb.d.low.chips": "What upset you?",
+  "fb.d.low.chips": "What didn't you like?",
   "fb.d.low.dis": "What exactly went wrong?",
   "fb.d.low.dis.ph": "Tell us more — we'll look into it and put it right…",
   "fb.d.low.imp": "What can we do to win you back?",
@@ -266,7 +266,7 @@ Object.assign(I18N.en, {
   "fb.d.high.imp.ph": "A new flavour, set or format — anything you dream of"
 });
 Object.assign(I18N.uz, {
-  "fb.d.low.chips": "Sizni nima xafa qildi?",
+  "fb.d.low.chips": "Nima yoqmadi?",
   "fb.d.low.dis": "Aynan nima noto‘g‘ri bo‘ldi?",
   "fb.d.low.dis.ph": "Batafsilroq yozing — ko‘rib chiqamiz va hammasini tuzatamiz…",
   "fb.d.low.imp": "Qaytib kelishingiz uchun nima qilaylik?",
