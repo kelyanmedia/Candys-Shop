@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title data-i18n="meta.feedback">Обратная связь — Uzbek Halva &amp; Dry Fruits</title>
+  <meta name="description" content="Оставьте отзыв о магазине Uzbek Halva & Dry Fruits.">
+  <meta name="theme-color" content="#1a1424">
+  <link rel="icon" href="assets/img/pattern.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="feedback">
+
+<main>
+  <section class="page-head">
+    <img src="assets/img/store-corner.jpg" alt="">
+    <div class="container">
+      <h1 data-i18n="fb.head.title"></h1>
+      <p data-i18n="fb.head.text"></p>
+    </div>
+  </section>
+  <div class="lattice" aria-hidden="true"></div>
+
+  <section class="section">
+    <div class="container feedback-layout">
+      <form class="form-card" id="feedback-form" novalidate>
+        <fieldset class="form-section">
+          <div class="form-section-title"><span class="num">01</span><h2 data-i18n="fb.s1"></h2></div>
+          <div class="field-row">
+            <div class="field">
+              <label for="fb-name" data-i18n="fb.name"></label>
+              <input class="input" id="fb-name" name="name" type="text" autocomplete="name" maxlength="100" data-i18n-placeholder="fb.name.ph">
+            </div>
+            <div class="field">
+              <label for="fb-contact"><span data-i18n="fb.contact"></span> <span class="hint" data-i18n="fb.optional"></span></label>
+              <input class="input" id="fb-contact" name="contact" type="text" autocomplete="tel" maxlength="100" data-i18n-placeholder="fb.contact.ph">
+            </div>
+          </div>
+          <div class="field" style="max-width:260px">
+            <label for="fb-date" data-i18n="fb.date"></label>
+            <input class="input" id="fb-date" name="date" type="date">
+          </div>
+        </fieldset>
+
+        <fieldset class="form-section">
+          <div class="form-section-title"><span class="num">02</span><h2 data-i18n="fb.s2"></h2></div>
+          <div class="field">
+            <span class="q" id="rating-label" data-i18n="fb.q"></span>
+            <div class="rating" id="rating" role="radiogroup" aria-labelledby="rating-label"></div>
+            <div class="rating-scale"><span data-i18n="fb.low"></span><span data-i18n="fb.high"></span></div>
+            <div class="rating-face" id="rating-face" aria-live="polite"></div>
+            <div class="form-error" id="rating-error" data-i18n="fb.err.rating"></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-section">
+          <div class="form-section-title"><span class="num">03</span><h2 data-i18n="fb.s3"></h2></div>
+          <div class="field">
+            <span class="q" data-i18n="fb.liked"></span>
+            <div class="chips">
+              <input type="checkbox" id="c-taste" name="liked" value="taste"><label for="c-taste" data-i18n="fb.c.taste"></label>
+              <input type="checkbox" id="c-range" name="liked" value="range"><label for="c-range" data-i18n="fb.c.range"></label>
+              <input type="checkbox" id="c-pack" name="liked" value="packaging"><label for="c-pack" data-i18n="fb.c.pack"></label>
+              <input type="checkbox" id="c-service" name="liked" value="service"><label for="c-service" data-i18n="fb.c.service"></label>
+              <input type="checkbox" id="c-price" name="liked" value="price"><label for="c-price" data-i18n="fb.c.price"></label>
+              <input type="checkbox" id="c-atm" name="liked" value="atmosphere"><label for="c-atm" data-i18n="fb.c.atm"></label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="fb-disliked" data-i18n="fb.disliked"></label>
+            <textarea class="textarea" id="fb-disliked" name="disliked" maxlength="1500" data-i18n-placeholder="fb.disliked.ph"></textarea>
+          </div>
+          <div class="field">
+            <label for="fb-improve" data-i18n="fb.improve"></label>
+            <textarea class="textarea" id="fb-improve" name="improve" maxlength="1500" data-i18n-placeholder="fb.improve.ph"></textarea>
+          </div>
+        </fieldset>
+
+        <!-- Honeypot: hidden from people, bots fill it in -->
+        <div class="sr-only" aria-hidden="true">
+          <label for="fb-website">Website</label>
+          <input id="fb-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="form-error" id="send-error" role="alert"></div>
+        <div class="form-footer">
+          <button class="btn btn-dark" type="submit" data-i18n="fb.submit"></button>
+          <p data-i18n="fb.note"></p>
+        </div>
+      </form>
+
+      <aside class="aside">
+        <h3 data-i18n="fb.aside.title"></h3>
+        <p data-i18n="fb.aside.text"></p>
+        <ul>
+          <li><a data-site="telegram" target="_blank" rel="noopener"><span data-i18n="fb.aside.tg"></span><span>→</span></a></li>
+          <li><a data-site="instagram" target="_blank" rel="noopener"><span data-i18n="fb.aside.ig"></span><span>→</span></a></li>
+          <li><a data-site="phone"><span data-i18n="fb.aside.call"></span><span>→</span></a></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<div class="modal" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="success-title">
+  <div class="modal-box">
+    <h2 id="success-title" data-i18n="fb.ok.title"></h2>
+    <p data-i18n="fb.ok.text"></p>
+    <div class="modal-actions">
+      <a class="btn btn-dark" href="index.html" data-i18n="fb.ok.home"></a>
+      <button class="btn btn-line" type="button" id="modal-close" data-i18n="fb.ok.close"></button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/layout.js"></script>
+<script src="assets/js/feedback.js"></script>
+</body>
+</html>
