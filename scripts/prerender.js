@@ -7,6 +7,7 @@
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const crypto = require("crypto");
 
 const ROOT = path.join(__dirname, "..");
 const BASE = "https://www.uzbekfruitsairport.uz";
@@ -137,6 +138,11 @@ for (const p of PAGES) {
   html = html.replace(/<\/main>/, `</main>\n<!-- prerender:footer -->${footer()}<!-- /prerender:footer -->`);
 
   html = fillI18n(html);
+  // Версия в адресе CSS/JS: после правок браузер не показывает закэшированную старую версию
+  html = html.replace(/(src|href)="(\/assets\/(?:css|js)\/[\w.-]+\.(?:css|js))(?:\?v=[a-f0-9]+)?"/g, (m, attr, url) => {
+    const v = crypto.createHash("md5").update(fs.readFileSync(path.join(ROOT, url))).digest("hex").slice(0, 8);
+    return `${attr}="${url}?v=${v}"`;
+  });
   fs.writeFileSync(file, html);
   console.log("prerendered", p.file);
 }

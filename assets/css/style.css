@@ -754,3 +754,6 @@ input[type="date"].input { display: block; min-width: 0; line-height: 1.4; }
 .thanks-gift { width: min(200px, 52vw); margin: 0 auto 28px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: #fff;
   transform: rotate(-3deg); box-shadow: 0 18px 40px rgba(26,20,36,.14); }
 .thanks-gift img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
+
+/* Картинки с атрибутом height не должны растягиваться */
+img { height: auto; }
