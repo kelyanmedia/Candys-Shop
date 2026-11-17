@@ -226,9 +226,9 @@ Object.assign(I18N.uz, {
 });
 
 /* ---------- Авторство фото ---------- */
-I18N.ru["products.credits"] = "Фото категорий: Wikimedia Commons — Drejwen (CC BY 4.0), Ekaterina Kvelidze (CC BY-SA 4.0), Kuwanishbek, piviso.com, MirfayzbekAbdullayev (CC0).";
-I18N.en["products.credits"] = "Category photos: Wikimedia Commons — Drejwen (CC BY 4.0), Ekaterina Kvelidze (CC BY-SA 4.0), Kuwanishbek, piviso.com, MirfayzbekAbdullayev (CC0).";
-I18N.uz["products.credits"] = "Kategoriya suratlari: Wikimedia Commons — Drejwen (CC BY 4.0), Ekaterina Kvelidze (CC BY-SA 4.0), Kuwanishbek, piviso.com, MirfayzbekAbdullayev (CC0).";
+I18N.ru["products.credits"] = "Фото «Сухофрукты», «Орехи» и «Восточные сладости»: Wikimedia Commons — Kuwanishbek, piviso.com (CC0), Ekaterina Kvelidze (CC BY-SA 4.0).";
+I18N.en["products.credits"] = "Photos for dried fruits, nuts and oriental sweets: Wikimedia Commons — Kuwanishbek, piviso.com (CC0), Ekaterina Kvelidze (CC BY-SA 4.0).";
+I18N.uz["products.credits"] = "Quruq mevalar, yong‘oqlar va sharq shirinliklari suratlari: Wikimedia Commons — Kuwanishbek, piviso.com (CC0), Ekaterina Kvelidze (CC BY-SA 4.0).";
 
 /* ---------- Блок «Подробности»: тексты зависят от оценки (low 0–6, mid 7–8, high 9–10) ---------- */
 Object.assign(I18N.ru, {
@@ -281,4 +281,65 @@ Object.assign(I18N.uz, {
   "fb.d.high.dis.ph": "Mayda narsalar ham o‘sishimizga yordam beradi — bo‘lsa, yozing",
   "fb.d.high.imp": "Yana nimani ko‘rishni xohlardingiz?",
   "fb.d.high.imp.ph": "Yangi ta’m, to‘plam, format — orzu qilgan hamma narsa"
+});
+
+/* ---------- Подарочные наборы (главная, ассортимент, о компании, спасибо) ---------- */
+Object.assign(I18N.ru, {
+  "home.sets.title": "Коробки, которые приятно дарить",
+  "home.sets.link": "Все наборы",
+  "home.sets.text": "Халва и восточные сладости в нарядных коробках и пакетах с узорами — для близких, коллег и гостей.",
+  "products.sets.title": "Наборы и упаковка",
+  "products.sets.text": "Разные цвета и рисунки коробок: выберите ту, что подойдёт к случаю.",
+  "about.pack.title": "Нарядная упаковка",
+  "about.pack.p1": "Халву и сладости можно взять в подарочной коробке с узорами и в пакете в тон — подарок выглядит праздничным сразу.",
+  "about.pack.p2": "Расцветок несколько: от строгих синих и зелёных до тёплых оранжевых и красных. Подскажем, какая подойдёт для вашего случая."
+});
+Object.assign(I18N.en, {
+  "home.sets.title": "Boxes made for gifting",
+  "home.sets.link": "All sets",
+  "home.sets.text": "Halva and oriental sweets in festive patterned boxes and matching bags — for family, colleagues and guests.",
+  "products.sets.title": "Sets and packaging",
+  "products.sets.text": "Boxes come in different colours and designs: pick the one that suits the occasion.",
+  "about.pack.title": "Festive packaging",
+  "about.pack.p1": "You can take halva and sweets in a patterned gift box with a matching bag, so the present looks festive right away.",
+  "about.pack.p2": "There are several colours, from calm blues and greens to warm oranges and reds. We'll help you choose the right one."
+});
+Object.assign(I18N.uz, {
+  "home.sets.title": "Sovg‘a qilish yoqimli bo‘lgan qutilar",
+  "home.sets.link": "Barcha to‘plamlar",
+  "home.sets.text": "Naqshli bayramona qutilar va mos paketlardagi holva va sharq shirinliklari — yaqinlar, hamkasblar va mehmonlar uchun.",
+  "products.sets.title": "To‘plamlar va qadoq",
+  "products.sets.text": "Qutilar turli rang va naqshlarda: munosabatga mosini tanlang.",
+  "about.pack.title": "Bayramona qadoq",
+  "about.pack.p1": "Holva va shirinliklarni naqshli sovg‘a qutisida va mos paketda olish mumkin — sovg‘a darhol bayramona ko‘rinadi.",
+  "about.pack.p2": "Ranglar bir nechta: sokin ko‘k va yashildan iliq to‘q sariq va qizilgacha. Qaysi biri mosligini aytib beramiz."
+});
+
+/* ---------- Удобный способ связи ---------- */
+Object.assign(I18N.ru, {
+  "fb.method": "Как вам удобнее, чтобы мы связались?",
+  "fb.m.whatsapp": "WhatsApp", "fb.m.telegram": "Telegram", "fb.m.phone": "Звонок", "fb.m.email": "E-mail",
+  "fb.wa.label": "Номер в WhatsApp", "fb.wa.hint": "Напишем вам в WhatsApp на этот номер",
+  "fb.phone.label": "Номер для звонка", "fb.phone.hint": "Позвоним по этому номеру",
+  "fb.tg.label": "Ваш Telegram", "fb.tg.ph": "username", "fb.tg.hint": "Укажите @username — мы напишем вам первыми",
+  "fb.email.hint": "Ответим на этот адрес",
+  "fb.err.contact.tg": "Проверьте username: латиница, цифры и «_», от 5 символов"
+});
+Object.assign(I18N.en, {
+  "fb.method": "How would you like us to reach you?",
+  "fb.m.whatsapp": "WhatsApp", "fb.m.telegram": "Telegram", "fb.m.phone": "Phone call", "fb.m.email": "E-mail",
+  "fb.wa.label": "WhatsApp number", "fb.wa.hint": "We'll message you on WhatsApp at this number",
+  "fb.phone.label": "Phone number", "fb.phone.hint": "We'll call this number",
+  "fb.tg.label": "Your Telegram", "fb.tg.ph": "username", "fb.tg.hint": "Enter your @username — we'll message you first",
+  "fb.email.hint": "We'll reply to this address",
+  "fb.err.contact.tg": "Check the username: Latin letters, digits and \"_\", at least 5 characters"
+});
+Object.assign(I18N.uz, {
+  "fb.method": "Siz bilan qanday bog‘lanish qulay?",
+  "fb.m.whatsapp": "WhatsApp", "fb.m.telegram": "Telegram", "fb.m.phone": "Qo‘ng‘iroq", "fb.m.email": "E-mail",
+  "fb.wa.label": "WhatsApp raqami", "fb.wa.hint": "Shu raqamga WhatsApp’da yozamiz",
+  "fb.phone.label": "Telefon raqami", "fb.phone.hint": "Shu raqamga qo‘ng‘iroq qilamiz",
+  "fb.tg.label": "Telegram’ingiz", "fb.tg.ph": "username", "fb.tg.hint": "@username’ingizni yozing — birinchi bo‘lib yozamiz",
+  "fb.email.hint": "Shu manzilga javob beramiz",
+  "fb.err.contact.tg": "Username’ni tekshiring: lotin harflari, raqamlar va «_», kamida 5 belgi"
 });

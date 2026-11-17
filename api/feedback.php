@@ -58,6 +58,9 @@ $name     = clean($in['name'] ?? '', 100);
 $phone    = preg_replace('/[^\d+\s()\-]/', '', clean($in['phone'] ?? ($in['contact'] ?? ''), 40)) ?? '';
 $email    = clean($in['email'] ?? '', 100);
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $email = '';
+$tg = ltrim(clean($in['telegram'] ?? '', 40), '@');
+if (!preg_match('/^[A-Za-z][A-Za-z0-9_]{4,31}$/', $tg)) $tg = '';
+$method = in_array($in['method'] ?? '', ['whatsapp', 'telegram', 'phone', 'email'], true) ? $in['method'] : '';
 $disliked = clean($in['disliked'] ?? '', 1500);
 $improve  = clean($in['improve'] ?? '', 1500);
 $lang     = in_array($in['lang'] ?? '', ['ru', 'en', 'uz'], true) ? $in['lang'] : 'ru';
@@ -99,8 +102,12 @@ $lines = [
     "{$mark} <b>Оценка: {$rating}/10</b> " . ['😡','😠','😞','😕','😟','😐','🙂','😊','😄','🤩','🥳'][$rating] . " ({$group})",
 ];
 if ($name !== '')    $lines[] = '👤 <b>Имя:</b> ' . $e($name);
-if ($phone !== '')   $lines[] = '📞 <b>Телефон:</b> ' . $e($phone);
-if ($email !== '')   $lines[] = '✉️ <b>E-mail:</b> ' . $e($email);
+$digits = preg_replace('/\D/', '', $phone);
+if ($method === 'whatsapp' && $digits !== '')      $lines[] = '💬 <b>Удобнее всего:</b> WhatsApp — <a href="https://wa.me/' . $digits . '">' . $e($phone) . '</a>';
+elseif ($method === 'telegram' && $tg !== '')      $lines[] = '✈️ <b>Удобнее всего:</b> Telegram — <a href="https://t.me/' . $tg . '">@' . $tg . '</a>';
+elseif ($method === 'email' && $email !== '')      $lines[] = '✉️ <b>Удобнее всего:</b> E-mail — ' . $e($email);
+elseif ($phone !== '')                             $lines[] = '📞 <b>' . ($method === 'phone' ? 'Удобнее всего: звонок' : 'Телефон') . ':</b> ' . $e($phone);
+elseif ($email !== '')                             $lines[] = '✉️ <b>E-mail:</b> ' . $e($email);
 if ($date !== '')    $lines[] = '📅 <b>Дата визита:</b> ' . $e(date('d.m.Y', strtotime($date)));
 $low = $rating <= 4;
 if ($liked)          $lines[] = ($low ? '👎 <b>Что не понравилось:</b> ' : '👍 <b>Понравилось:</b> ') . $e(implode(', ', $liked));

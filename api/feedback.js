@@ -40,6 +40,9 @@ module.exports = async (req, res) => {
   const name = clean(inp.name, 100);
   const phone = clean(inp.phone || inp.contact, 40).replace(/[^\d+\s()\-]/g, "");
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(clean(inp.email, 100)) ? clean(inp.email, 100) : "";
+  const tgRaw = clean(inp.telegram, 40).replace(/^@+/, "");
+  const telegram = /^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(tgRaw) ? tgRaw : "";
+  const method = ["whatsapp", "telegram", "phone", "email"].includes(inp.method) ? inp.method : "";
   const disliked = clean(inp.disliked, 1500), improve = clean(inp.improve, 1500);
   const lang = ["ru", "en", "uz"].includes(inp.lang) ? inp.lang : "ru";
   let date = clean(inp.date, 10);
@@ -49,8 +52,13 @@ module.exports = async (req, res) => {
   const [mark, group] = rating >= 9 ? ["🟢", "промоутер"] : rating >= 7 ? ["🟡", "нейтрал"] : ["🔴", "критик"];
   const lines = ["<b>🍯 Новый отзыв — Uzbek Halva &amp; Dry Fruits</b>", "", `${mark} <b>Оценка: ${rating}/10</b> ${EMOJI[rating]} (${group})`];
   if (name) lines.push("👤 <b>Имя:</b> " + esc(name));
-  if (phone) lines.push("📞 <b>Телефон:</b> " + esc(phone));
-  if (email) lines.push("✉️ <b>E-mail:</b> " + esc(email));
+  // Удобный способ связи — со ссылкой, чтобы ответить в один клик
+  const digits = phone.replace(/\D/g, "");
+  if (method === "whatsapp" && digits) lines.push(`💬 <b>Удобнее всего:</b> WhatsApp — <a href="https://wa.me/${digits}">${esc(phone)}</a>`);
+  else if (method === "telegram" && telegram) lines.push(`✈️ <b>Удобнее всего:</b> Telegram — <a href="https://t.me/${telegram}">@${telegram}</a>`);
+  else if (method === "email" && email) lines.push(`✉️ <b>Удобнее всего:</b> E-mail — ${esc(email)}`);
+  else if (phone) lines.push(`📞 <b>${method === "phone" ? "Удобнее всего: звонок" : "Телефон"}:</b> ${esc(phone)}`);
+  else if (email) lines.push("✉️ <b>E-mail:</b> " + esc(email));
   if (date) lines.push("📅 <b>Дата визита:</b> " + date.split("-").reverse().join("."));
   // Подписи зависят от оценки: так же, как тексты в форме
   const low = rating <= 4;

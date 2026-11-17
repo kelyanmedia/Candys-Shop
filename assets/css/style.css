@@ -705,3 +705,52 @@ input[type="date"].input { display: block; min-width: 0; line-height: 1.4; }
 }
 .site-footer .brand small { margin-top: 4px; }
 .credits { margin: 28px 0 0; font-size: .78rem; color: var(--muted); }
+
+
+/* =========================================================
+   v3: наборы-коробки, способ связи, «Спасибо» с фото
+   ========================================================= */
+.field-hint { margin: 6px 0 0; font-size: .84rem; color: var(--muted); }
+.methods { margin-top: 2px; }
+.chips input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+.chips input[type="radio"]:checked + label { background: var(--dark); border-color: var(--dark); color: var(--white); box-shadow: 0 6px 14px rgba(26,20,36,.18); }
+.chips input[type="radio"]:focus-visible + label { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.tg-box { position: relative; }
+.tg-box > span { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--muted); font-weight: 500; pointer-events: none; }
+.tg-box .input { padding-left: 34px; }
+
+/* Коробки: ровный ряд на широких экранах, лента со свайпом на узких */
+.sets-lead { margin: -8px 0 28px; }
+.sets-head { margin: clamp(48px, 7vw, 80px) 0 24px; }
+.sets-head h2 { margin-bottom: 10px; }
+.sets-head .lead { margin: 0; }
+.sets { --gap: 16px; display: flex; gap: var(--gap); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; scrollbar-width: none; }
+.sets::-webkit-scrollbar { display: none; }
+.set { flex: 0 0 calc((100% - var(--gap) * (var(--n, 4) - 1)) / var(--n, 4)); margin: 0; scroll-snap-align: start;
+  background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; transition: transform .3s ease, box-shadow .3s ease; }
+.set img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
+.set:hover { transform: translateY(-6px); box-shadow: 0 22px 44px rgba(26,20,36,.14); }
+@media (max-width: 1024px) {
+  .set { flex-basis: clamp(210px, 38vw, 280px); }
+  .sets { margin-inline: -20px; padding-inline: 20px; scroll-padding-inline: 20px; }
+}
+@media (max-width: 560px) {
+  .set { flex-basis: 66vw; }
+  .sets { margin-inline: -16px; padding-inline: 16px; scroll-padding-inline: 16px; }
+}
+
+/* Баннеры категорий: фото коробок кадрируем по содержимому */
+.banner-img img[src*="cat-halva"], .banner-img img[src*="cat-gifts"] { object-position: 50% 62%; background: #fff; }
+
+/* О компании: два фото упаковки */
+.pack { align-items: center; }
+.pack-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+.pack-photos .photo { aspect-ratio: 3 / 4; border: 1px solid var(--line); }
+.pack-photos .photo:nth-child(2) { margin-top: 40px; }
+@media (max-width: 860px) { .pack-photos .photo:nth-child(2) { margin-top: 24px; } }
+
+/* Спасибо: фото подарка */
+.thanks-gift { width: min(200px, 52vw); margin: 0 auto 28px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); background: #fff;
+  transform: rotate(-3deg); box-shadow: 0 18px 40px rgba(26,20,36,.14); }
+.thanks-gift img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }

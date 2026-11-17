@@ -84,8 +84,17 @@
             <label for="fb-name" data-i18n="fb.name">Как к вам обращаться?</label>
             <input class="input" id="fb-name" name="name" type="text" autocomplete="name" maxlength="100" data-i18n-placeholder="fb.name.ph" placeholder="Ваше имя">
           </div>
+          <div class="field" id="method-field">
+            <span class="q" id="method-label"><span data-i18n="fb.method">Как вам удобнее, чтобы мы связались?</span> <span class="hint" data-i18n="fb.optional">необязательно</span></span>
+            <div class="chips methods" role="radiogroup" aria-labelledby="method-label">
+              <input type="radio" name="method" id="m-whatsapp" value="whatsapp" checked><label for="m-whatsapp"><span aria-hidden="true">💬</span> <span data-i18n="fb.m.whatsapp">WhatsApp</span></label>
+              <input type="radio" name="method" id="m-telegram" value="telegram"><label for="m-telegram"><span aria-hidden="true">✈️</span> <span data-i18n="fb.m.telegram">Telegram</span></label>
+              <input type="radio" name="method" id="m-phone" value="phone"><label for="m-phone"><span aria-hidden="true">📞</span> <span data-i18n="fb.m.phone">Звонок</span></label>
+              <input type="radio" name="method" id="m-email" value="email"><label for="m-email"><span aria-hidden="true">✉️</span> <span data-i18n="fb.m.email">E-mail</span></label>
+            </div>
+          </div>
           <div class="field" id="phone-field">
-            <label for="fb-phone"><span data-i18n="fb.contact.phone">Телефон</span> <span class="hint" data-i18n="fb.optional">необязательно</span></label>
+            <label for="fb-phone" id="phone-label" data-i18n="fb.wa.label">Номер в WhatsApp</label>
             <div class="phone-box" id="phone-box">
               <button class="cc-btn" type="button" id="cc-btn" aria-haspopup="listbox" aria-expanded="false" data-i18n-aria="fb.country" aria-label="Страна">
                 <span class="cc-flag" id="cc-flag"></span><span class="cc-code" id="cc-code"></span><span class="cc-arrow" aria-hidden="true"></span>
@@ -96,11 +105,19 @@
                 <ul class="cc-list" id="cc-list" role="listbox"></ul>
               </div>
             </div>
+            <p class="field-hint" id="phone-hint" data-i18n="fb.wa.hint">Напишем вам в WhatsApp на этот номер</p>
             <div class="form-error" id="phone-error"></div>
           </div>
-          <div class="field" id="email-field">
-            <label for="fb-email"><span data-i18n="fb.contact.email">E-mail</span> <span class="hint" data-i18n="fb.optional">необязательно</span></label>
+          <div class="field" id="tg-field" hidden>
+            <label for="fb-telegram" data-i18n="fb.tg.label">Ваш Telegram</label>
+            <div class="tg-box"><span aria-hidden="true">@</span><input class="input" id="fb-telegram" type="text" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" maxlength="40" data-i18n-placeholder="fb.tg.ph" placeholder="username"></div>
+            <p class="field-hint" data-i18n="fb.tg.hint">Укажите @username — мы напишем вам первыми</p>
+            <div class="form-error" id="tg-error"></div>
+          </div>
+          <div class="field" id="email-field" hidden>
+            <label for="fb-email" data-i18n="fb.contact.email">E-mail</label>
             <input class="input" id="fb-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="100" data-i18n-placeholder="fb.contact.ph.email" placeholder="name@example.com">
+            <p class="field-hint" data-i18n="fb.email.hint">Ответим на этот адрес</p>
             <div class="form-error" id="email-error"></div>
           </div>
           <div class="field">
