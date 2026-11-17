@@ -315,31 +315,22 @@ Object.assign(I18N.uz, {
   "about.pack.p2": "Ranglar bir nechta: sokin ko‘k va yashildan iliq to‘q sariq va qizilgacha. Qaysi biri mosligini aytib beramiz."
 });
 
-/* ---------- Удобный способ связи ---------- */
+/* ---------- Номер и мессенджер ---------- */
 Object.assign(I18N.ru, {
-  "fb.method": "Как вам удобнее, чтобы мы связались?",
-  "fb.m.whatsapp": "WhatsApp", "fb.m.telegram": "Telegram", "fb.m.phone": "Звонок", "fb.m.email": "E-mail",
-  "fb.wa.label": "Номер в WhatsApp", "fb.wa.hint": "Напишем вам в WhatsApp на этот номер",
-  "fb.phone.label": "Номер для звонка", "fb.phone.hint": "Позвоним по этому номеру",
-  "fb.tg.label": "Ваш Telegram", "fb.tg.ph": "username", "fb.tg.hint": "Укажите @username — мы напишем вам первыми",
-  "fb.email.hint": "Ответим на этот адрес",
-  "fb.err.contact.tg": "Проверьте username: латиница, цифры и «_», от 5 символов"
+  "fb.phone.label": "Ваш номер телефона",
+  "fb.method": "Где вам удобнее общаться?",
+  "fb.phone.hint": "Напишем на этот номер в выбранном мессенджере",
+  "fb.err.contact.phone": "Проверьте номер телефона"
 });
 Object.assign(I18N.en, {
-  "fb.method": "How would you like us to reach you?",
-  "fb.m.whatsapp": "WhatsApp", "fb.m.telegram": "Telegram", "fb.m.phone": "Phone call", "fb.m.email": "E-mail",
-  "fb.wa.label": "WhatsApp number", "fb.wa.hint": "We'll message you on WhatsApp at this number",
-  "fb.phone.label": "Phone number", "fb.phone.hint": "We'll call this number",
-  "fb.tg.label": "Your Telegram", "fb.tg.ph": "username", "fb.tg.hint": "Enter your @username — we'll message you first",
-  "fb.email.hint": "We'll reply to this address",
-  "fb.err.contact.tg": "Check the username: Latin letters, digits and \"_\", at least 5 characters"
+  "fb.phone.label": "Your phone number",
+  "fb.method": "Where would you prefer to chat?",
+  "fb.phone.hint": "We'll message this number in the messenger you choose",
+  "fb.err.contact.phone": "Please check the phone number"
 });
 Object.assign(I18N.uz, {
-  "fb.method": "Siz bilan qanday bog‘lanish qulay?",
-  "fb.m.whatsapp": "WhatsApp", "fb.m.telegram": "Telegram", "fb.m.phone": "Qo‘ng‘iroq", "fb.m.email": "E-mail",
-  "fb.wa.label": "WhatsApp raqami", "fb.wa.hint": "Shu raqamga WhatsApp’da yozamiz",
-  "fb.phone.label": "Telefon raqami", "fb.phone.hint": "Shu raqamga qo‘ng‘iroq qilamiz",
-  "fb.tg.label": "Telegram’ingiz", "fb.tg.ph": "username", "fb.tg.hint": "@username’ingizni yozing — birinchi bo‘lib yozamiz",
-  "fb.email.hint": "Shu manzilga javob beramiz",
-  "fb.err.contact.tg": "Username’ni tekshiring: lotin harflari, raqamlar va «_», kamida 5 belgi"
+  "fb.phone.label": "Telefon raqamingiz",
+  "fb.method": "Qayerda yozishish qulay?",
+  "fb.phone.hint": "Tanlangan messenjerda shu raqamga yozamiz",
+  "fb.err.contact.phone": "Telefon raqamini tekshiring"
 });

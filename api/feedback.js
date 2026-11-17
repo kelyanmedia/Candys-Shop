@@ -52,13 +52,11 @@ module.exports = async (req, res) => {
   const [mark, group] = rating >= 9 ? ["🟢", "промоутер"] : rating >= 7 ? ["🟡", "нейтрал"] : ["🔴", "критик"];
   const lines = ["<b>🍯 Новый отзыв — Uzbek Halva &amp; Dry Fruits</b>", "", `${mark} <b>Оценка: ${rating}/10</b> ${EMOJI[rating]} (${group})`];
   if (name) lines.push("👤 <b>Имя:</b> " + esc(name));
-  // Удобный способ связи — со ссылкой, чтобы ответить в один клик
+  // Номер + выбранный мессенджер, со ссылкой для ответа в один клик
   const digits = phone.replace(/\D/g, "");
-  if (method === "whatsapp" && digits) lines.push(`💬 <b>Удобнее всего:</b> WhatsApp — <a href="https://wa.me/${digits}">${esc(phone)}</a>`);
-  else if (method === "telegram" && telegram) lines.push(`✈️ <b>Удобнее всего:</b> Telegram — <a href="https://t.me/${telegram}">@${telegram}</a>`);
-  else if (method === "email" && email) lines.push(`✉️ <b>Удобнее всего:</b> E-mail — ${esc(email)}`);
-  else if (phone) lines.push(`📞 <b>${method === "phone" ? "Удобнее всего: звонок" : "Телефон"}:</b> ${esc(phone)}`);
-  else if (email) lines.push("✉️ <b>E-mail:</b> " + esc(email));
+  if (method === "whatsapp" && digits) lines.push(`💬 <b>Пишите в WhatsApp:</b> <a href="https://wa.me/${digits}">${esc(phone)}</a>`);
+  else if (method === "telegram" && digits) lines.push(`✈️ <b>Пишите в Telegram:</b> <a href="https://t.me/+${digits}">${esc(phone)}</a>`);
+  else if (phone) lines.push(`📞 <b>Телефон:</b> ${esc(phone)}`);
   if (date) lines.push("📅 <b>Дата визита:</b> " + date.split("-").reverse().join("."));
   // Подписи зависят от оценки: так же, как тексты в форме
   const low = rating <= 4;

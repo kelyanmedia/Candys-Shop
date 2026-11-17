@@ -100,14 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ======================= Контакт: телефон / e-mail ======================= */
   const phoneBox = document.getElementById("phone-box");
   const phoneInput = document.getElementById("fb-phone");
-  const emailInput = document.getElementById("fb-email");
   const phoneError = document.getElementById("phone-error");
-  const emailError = document.getElementById("email-error");
-  const tgInput = document.getElementById("fb-telegram");
-  const tgError = document.getElementById("tg-error");
-  const phoneField = document.getElementById("phone-field");
-  const tgField = document.getElementById("tg-field");
-  const emailField = document.getElementById("email-field");
   const ccBtn = document.getElementById("cc-btn");
   const ccPanel = document.getElementById("cc-panel");
   const ccSearch = document.getElementById("cc-search");
@@ -195,52 +188,15 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", e => { if (!ccPanel.hidden && !phoneBox.contains(e.target)) openPanel(false); });
   document.addEventListener("keydown", e => { if (e.key === "Escape" && !ccPanel.hidden) { openPanel(false); ccBtn.focus(); } });
 
-  emailInput.addEventListener("input", () => emailError.classList.remove("show"));
+  /* ---- Номер + мессенджер (WhatsApp или Telegram) ---- */
+  const methodOf = () => (form.querySelector('input[name="method"]:checked') || {}).value || "whatsapp";
 
-  /* ---- Удобный способ связи: WhatsApp / Telegram / звонок / e-mail ---- */
-  const methodOf = () => (form.querySelector('input[name="method"]:checked') || {}).value || "";
-  function setMethod() {
-    const m = methodOf();
-    const usesPhone = m === "whatsapp" || m === "phone";
-    phoneField.hidden = !usesPhone;
-    tgField.hidden = m !== "telegram";
-    emailField.hidden = m !== "email";
-    document.getElementById("phone-label").dataset.i18n = m === "phone" ? "fb.phone.label" : "fb.wa.label";
-    document.getElementById("phone-hint").dataset.i18n = m === "phone" ? "fb.phone.hint" : "fb.wa.hint";
-    [phoneError, emailError, tgError].forEach(el => el.classList.remove("show"));
-    openPanel(false);
-    applyI18n();
-  }
-  form.querySelectorAll('input[name="method"]').forEach(r => r.addEventListener("change", setMethod));
-
-  // @username / t.me/username / пробелы -> чистый username
-  const cleanTg = v => v.trim().replace(/^(https?:\/\/)?(www\.)?(t\.me|telegram\.me)\//i, "").replace(/^@+/, "").replace(/[\s?/].*$/, "");
-  tgInput.addEventListener("input", () => {
-    const c = cleanTg(tgInput.value);
-    if (c !== tgInput.value) tgInput.value = c;
-    tgError.classList.remove("show");
-  });
-
-  /* Возвращает { method, phone, telegram, email } или { error, field } */
+  /* Возвращает { method, phone } или { error } */
   function readContact() {
-    const m = methodOf();
-    if (m === "whatsapp" || m === "phone") {
-      const digits = phoneInput.value.replace(/\D/g, "");
-      if (!digits) return {};
-      const ok = country.len ? digits.length === country.len : digits.length >= 6;
-      return ok ? { method: m, phone: `+${country.dial} ${phoneInput.value.trim()}` } : { error: "fb.err.contact.phone", field: "phone" };
-    }
-    if (m === "telegram") {
-      const v = cleanTg(tgInput.value);
-      if (!v) return {};
-      return /^[A-Za-z][A-Za-z0-9_]{4,31}$/.test(v) ? { method: m, telegram: v } : { error: "fb.err.contact.tg", field: "tg" };
-    }
-    if (m === "email") {
-      const v = emailInput.value.trim();
-      if (!v) return {};
-      return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? { method: m, email: v } : { error: "fb.err.contact.email", field: "email" };
-    }
-    return {};
+    const digits = phoneInput.value.replace(/\D/g, "");
+    if (!digits) return {};
+    const ok = country.len ? digits.length === country.len : digits.length >= 6;
+    return ok ? { method: methodOf(), phone: `+${country.dial} ${phoneInput.value.trim()}` } : { error: "fb.err.contact.phone" };
   }
 
   /* ======================= Дата ======================= */
@@ -256,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   setCountry(country);
   updateReaction(false);
-  setMethod();
 
   /* ======================= Отправка ======================= */
   form.addEventListener("submit", async e => {
@@ -266,10 +221,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const contact = readContact();
     if (contact.error) {
-      const box = { phone: [phoneError, phoneInput], tg: [tgError, tgInput], email: [emailError, emailInput] }[contact.field];
-      box[0].textContent = t(contact.error);
-      box[0].classList.add("show");
-      box[1].focus();
+      phoneError.textContent = t(contact.error);
+      phoneError.classList.add("show");
+      phoneInput.focus();
       return;
     }
     if (!fd.get("rating")) {
@@ -282,8 +236,6 @@ document.addEventListener("DOMContentLoaded", () => {
       name: (fd.get("name") || "").trim(),
       method: contact.method || "",
       phone: contact.phone || "",
-      telegram: contact.telegram || "",
-      email: contact.email || "",
       mode: ratingGroup(Number(fd.get("rating"))) === "low" ? "disliked" : "liked",
       date: fd.get("date"),
       rating: Number(fd.get("rating")),

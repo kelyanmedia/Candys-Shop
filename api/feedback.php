@@ -103,11 +103,9 @@ $lines = [
 ];
 if ($name !== '')    $lines[] = '👤 <b>Имя:</b> ' . $e($name);
 $digits = preg_replace('/\D/', '', $phone);
-if ($method === 'whatsapp' && $digits !== '')      $lines[] = '💬 <b>Удобнее всего:</b> WhatsApp — <a href="https://wa.me/' . $digits . '">' . $e($phone) . '</a>';
-elseif ($method === 'telegram' && $tg !== '')      $lines[] = '✈️ <b>Удобнее всего:</b> Telegram — <a href="https://t.me/' . $tg . '">@' . $tg . '</a>';
-elseif ($method === 'email' && $email !== '')      $lines[] = '✉️ <b>Удобнее всего:</b> E-mail — ' . $e($email);
-elseif ($phone !== '')                             $lines[] = '📞 <b>' . ($method === 'phone' ? 'Удобнее всего: звонок' : 'Телефон') . ':</b> ' . $e($phone);
-elseif ($email !== '')                             $lines[] = '✉️ <b>E-mail:</b> ' . $e($email);
+if ($method === 'whatsapp' && $digits !== '')      $lines[] = '💬 <b>Пишите в WhatsApp:</b> <a href="https://wa.me/' . $digits . '">' . $e($phone) . '</a>';
+elseif ($method === 'telegram' && $digits !== '')  $lines[] = '✈️ <b>Пишите в Telegram:</b> <a href="https://t.me/+' . $digits . '">' . $e($phone) . '</a>';
+elseif ($phone !== '')                             $lines[] = '📞 <b>Телефон:</b> ' . $e($phone);
 if ($date !== '')    $lines[] = '📅 <b>Дата визита:</b> ' . $e(date('d.m.Y', strtotime($date)));
 $low = $rating <= 4;
 if ($liked)          $lines[] = ($low ? '👎 <b>Что не понравилось:</b> ' : '👍 <b>Понравилось:</b> ') . $e(implode(', ', $liked));

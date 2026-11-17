@@ -757,3 +757,25 @@ input[type="date"].input { display: block; min-width: 0; line-height: 1.4; }
 
 /* Картинки с атрибутом height не должны растягиваться */
 img { height: auto; }
+
+
+/* Выбор мессенджера: иконки WhatsApp и Telegram */
+.messengers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 2px; }
+.messengers input { position: absolute; opacity: 0; pointer-events: none; }
+.messengers label {
+  position: relative; display: flex; align-items: center; gap: 12px; margin: 0; padding: 14px 16px;
+  border: 1.5px solid var(--line); border-radius: 12px; background: var(--paper); cursor: pointer; font-weight: 500;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.messengers label:hover { border-color: #cfc6b4; }
+.messengers svg { flex: none; width: 34px; height: 34px; }
+.messengers label::after {
+  content: ""; position: absolute; right: 12px; top: 50%; width: 18px; height: 18px; margin-top: -9px;
+  border-radius: 50%; border: 1.5px solid var(--line); background: #fff; transition: .2s;
+}
+.messengers input:checked + label { background: #fff; }
+.messengers input:checked + label::after { border-color: transparent; background: var(--dark) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.7 2.7L12 5.5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / 12px no-repeat; }
+#m-whatsapp:checked + label { border-color: #25D366; box-shadow: 0 0 0 3px rgba(37,211,102,.18); }
+#m-telegram:checked + label { border-color: #27A7E7; box-shadow: 0 0 0 3px rgba(39,167,231,.18); }
+.messengers input:focus-visible + label { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (max-width: 400px) { .messengers label { padding: 12px; gap: 8px; } .messengers label::after { display: none; } }
