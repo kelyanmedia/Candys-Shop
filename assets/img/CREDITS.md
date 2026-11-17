@@ -1,6 +1,6 @@
 # Photo credits
 
-Фото подарочных наборов и коробок (`box-*.jpg`, `cat-halva.jpg`, `cat-gifts.jpg`) — собственные фото магазина.
+Фото подарочных наборов и коробок (`box-*.jpg`, `box-samarkand.jpg`, `box-green.jpg`) — собственные фото магазина.
 
 Остальные фото категорий — Wikimedia Commons:
 
