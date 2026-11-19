@@ -47,7 +47,7 @@ const PAGES = [
     desc: "Страница не найдена. Вернитесь на главную Uzbek Halva & Dry Fruits." },
 ];
 
-const CATS = [["halva", "box-samarkand.jpg"], ["dried", "cat-dried.jpg"], ["nuts", "cat-nuts.jpg"], ["sweets", "cat-sweets.jpg"], ["gifts", "box-green.jpg"]];
+const CATS = [["halva", "box-samarkand.jpg"], ["dried", "cat-dried.jpg"], ["nuts", "cat-nuts.jpg"], ["sweets", "sweets-box.jpg"], ["gifts", "box-green.jpg"]];
 
 function jsonLd(p) {
   const url = BASE + (p.path === "/" ? "/" : p.path);

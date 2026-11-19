@@ -226,9 +226,9 @@ Object.assign(I18N.uz, {
 });
 
 /* ---------- Авторство фото ---------- */
-I18N.ru["products.credits"] = "Фото «Сухофрукты», «Орехи» и «Восточные сладости»: Wikimedia Commons — Kuwanishbek, piviso.com (CC0), Ekaterina Kvelidze (CC BY-SA 4.0).";
-I18N.en["products.credits"] = "Photos for dried fruits, nuts and oriental sweets: Wikimedia Commons — Kuwanishbek, piviso.com (CC0), Ekaterina Kvelidze (CC BY-SA 4.0).";
-I18N.uz["products.credits"] = "Quruq mevalar, yong‘oqlar va sharq shirinliklari suratlari: Wikimedia Commons — Kuwanishbek, piviso.com (CC0), Ekaterina Kvelidze (CC BY-SA 4.0).";
+I18N.ru["products.credits"] = "Фото «Сухофрукты» и «Орехи»: Wikimedia Commons — Kuwanishbek, piviso.com (CC0).";
+I18N.en["products.credits"] = "Photos for dried fruits and nuts: Wikimedia Commons — Kuwanishbek, piviso.com (CC0).";
+I18N.uz["products.credits"] = "Quruq mevalar va yong‘oqlar suratlari: Wikimedia Commons — Kuwanishbek, piviso.com (CC0).";
 
 /* ---------- Блок «Подробности»: тексты зависят от оценки (low 0–6, mid 7–8, high 9–10) ---------- */
 Object.assign(I18N.ru, {
