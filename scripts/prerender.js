@@ -29,34 +29,36 @@ const T = key => vm.runInContext(`t(${JSON.stringify(key)}, "ru")`, ctx);
 const header = page => vm.runInContext(`renderHeader(${JSON.stringify(page)})`, ctx);
 const footer = () => vm.runInContext("renderFooter()", ctx);
 
+const fileVer = url => crypto.createHash("md5").update(fs.readFileSync(path.join(ROOT, url.split("?")[0]))).digest("hex").slice(0, 8);
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 /* ---- Страницы ---- */
 const PAGES = [
-  { file: "index.html", page: "home", path: "/", titleKey: "meta.home", image: "store-front-2.jpg",
+  { file: "index.html", page: "home", path: "/", titleKey: "meta.home", image: "og.jpg",
     desc: "Узбекская халва, сухофрукты, орехи и восточные сладости в зоне Duty Free аэропорта Ташкента. Свежие вкусы Узбекистана в дорогу и в подарок." },
-  { file: "about.html", page: "about", path: "/about", titleKey: "meta.about", image: "store-front.jpg",
+  { file: "about.html", page: "about", path: "/about", titleKey: "meta.about", image: "og.jpg",
     desc: "История магазина Uzbek Halva & Dry Fruits, наши принципы и как нас найти: зона вылета Duty Free международного аэропорта Ташкента." },
-  { file: "products.html", page: "products", path: "/products", titleKey: "meta.products", image: "store-side.jpg",
+  { file: "products.html", page: "products", path: "/products", titleKey: "meta.products", image: "og.jpg",
     desc: "Ассортимент: узбекская халва, сухофрукты, орехи, восточные сладости и подарочные наборы в Duty Free аэропорта Ташкента." },
-  { file: "feedback.html", page: "feedback", path: "/feedback", titleKey: "meta.feedback", image: "store-corner.jpg",
+  { file: "feedback.html", page: "feedback", path: "/feedback", titleKey: "meta.feedback", image: "og.jpg",
     desc: "Оставьте отзыв о магазине Uzbek Halva & Dry Fruits — оцените визит от 0 до 10 и расскажите, как нам стать лучше." },
-  { file: "thanks.html", page: "thanks", path: "/thanks", titleKey: "meta.thanks", image: "store-front-2.jpg", noindex: true,
+  { file: "thanks.html", page: "thanks", path: "/thanks", titleKey: "meta.thanks", image: "og.jpg", noindex: true,
     desc: "Спасибо за ваш отзыв о магазине Uzbek Halva & Dry Fruits." },
-  { file: "404.html", page: "404", path: "/404", titleKey: "meta.404", image: "store-front-2.jpg", noindex: true,
+  { file: "404.html", page: "404", path: "/404", titleKey: "meta.404", image: "og.jpg", noindex: true,
     desc: "Страница не найдена. Вернитесь на главную Uzbek Halva & Dry Fruits." },
 ];
 
-const CATS = [["halva", "box-samarkand.jpg"], ["dried", "cat-dried.jpg"], ["nuts", "cat-nuts.jpg"], ["sweets", "sweets-box.jpg"], ["gifts", "box-green.jpg"]];
+const CATS = [["halva", "box-samarkand.webp"], ["dried", "cat-dried.webp"], ["nuts", "cat-nuts.webp"], ["sweets", "sweets-box.webp"], ["gifts", "box-green.webp"]];
 
 function jsonLd(p) {
   const url = BASE + (p.path === "/" ? "/" : p.path);
   const store = {
     "@type": "Store", "@id": BASE + "/#store", name: SITE_NAME, url: BASE + "/",
     description: T("home.hero.text"),
-    image: BASE + "/assets/img/store-front-2.jpg",
+    image: BASE + "/assets/img/og.jpg",
     address: { "@type": "PostalAddress", streetAddress: "Duty Free, зона вылета, Международный аэропорт Ташкента", addressLocality: "Ташкент", addressCountry: "UZ" },
     areaServed: "UZ", inLanguage: ["ru", "en", "uz"],
+    hasMerchantReturnPolicy: { "@type": "MerchantReturnPolicy", applicableCountry: "UZ", returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted" },
     makesOffer: CATS.map(([k]) => ({ "@type": "Offer", itemOffered: { "@type": "Product", name: T("cat." + k), description: T("cat." + k + ".d") } })),
   };
   const graph = [];
@@ -98,8 +100,8 @@ function seoHead(p) {
     `<meta property="og:description" content="${esc(p.desc)}">`,
     `<meta property="og:url" content="${url}">`,
     `<meta property="og:image" content="${img}">`,
-    `<meta property="og:image:width" content="1280">`,
-    `<meta property="og:image:height" content="960">`,
+    `<meta property="og:image:width" content="1200">`,
+    `<meta property="og:image:height" content="630">`,
     `<meta property="og:locale" content="ru_RU">`,
     `<meta property="og:locale:alternate" content="en_US">`,
     `<meta property="og:locale:alternate" content="uz_UZ">`,
@@ -108,6 +110,7 @@ function seoHead(p) {
     `<meta name="twitter:description" content="${esc(p.desc)}">`,
     `<meta name="twitter:image" content="${img}">`,
     jsonLd(p),
+    ...(p.page === "home" ? [`<link rel="preload" as="image" href="/assets/img/store-front-2.webp" imagesrcset="/assets/img/store-front-2-640.webp 640w, /assets/img/store-front-2.webp 1280w" imagesizes="100vw" fetchpriority="high">`] : []),
   ].filter(Boolean);
   return lines.map(l => "  " + l).join("\n");
 }
@@ -143,6 +146,8 @@ for (const p of PAGES) {
     const v = crypto.createHash("md5").update(fs.readFileSync(path.join(ROOT, url))).digest("hex").slice(0, 8);
     return `${attr}="${url}?v=${v}"`;
   });
+  // Версия в адресе картинок: браузер хранит их долго, а при замене файла загружает новую
+  html = html.replace(/(?<=["\s,])(\/assets\/img\/[\w.-]+\.(?:webp|jpg|png|svg))(?:\?v=[a-f0-9]+)?/g, (m, url) => `${url}?v=${fileVer(url)}`);
   fs.writeFileSync(file, html);
   console.log("prerendered", p.file);
 }

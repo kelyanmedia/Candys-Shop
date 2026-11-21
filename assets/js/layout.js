@@ -84,6 +84,7 @@ function renderFooter() {
         </ul>
       </div>
     </div>
+    <div class="container footer-terms"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v4.5h-4.5"/><path d="M4 4l16 16"/></svg></span><strong data-i18n="terms.short"></strong><span data-i18n="terms.read"></span></div>
     <div class="container footer-bottom">
       <span>© ${new Date().getFullYear()} Uzbek Halva &amp; Dry Fruits. <span data-i18n="footer.rights"></span></span>
       <button class="to-top" type="button"><span data-i18n="footer.top"></span><span class="arr" aria-hidden="true">↑</span></button>

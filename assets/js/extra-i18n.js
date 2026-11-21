@@ -334,3 +334,50 @@ Object.assign(I18N.uz, {
   "fb.phone.hint": "Tanlangan messenjerda shu raqamga yozamiz",
   "fb.err.contact.phone": "Telefon raqamini tekshiring"
 });
+
+/* ---------- Условия покупки: возврат и обмен ---------- */
+Object.assign(I18N.ru, {
+  "terms.label": "Условия покупки",
+  "terms.title": "Возврат и обмен не предусмотрены",
+  "terms.lead": "Товары возврату и обмену не подлежат. Пожалуйста, ознакомьтесь перед покупкой.",
+  "terms.short": "Товары возврату и обмену не подлежат",
+  "terms.read": "Пожалуйста, ознакомьтесь перед покупкой.",
+  "terms.more": "Условия покупки",
+  "terms.c1.t": "Возврат и обмен",
+  "terms.c1.d": "Купленный товар возврату и обмену не подлежит.",
+  "terms.c2.t": "Осмотрите при покупке",
+  "terms.c2.d": "Проверьте набор и упаковку на месте — продавец покажет всё, что вас интересует.",
+  "terms.c3.t": "Попробуйте до покупки",
+  "terms.c3.d": "Не уверены в выборе? Угостим и поможем подобрать вкус и набор до оплаты.",
+  "terms.fb": "Обратите внимание: товары возврату и обмену не подлежат."
+});
+Object.assign(I18N.en, {
+  "terms.label": "Terms of purchase",
+  "terms.title": "No returns or exchanges",
+  "terms.lead": "Goods cannot be returned or exchanged. Please read this before you buy.",
+  "terms.short": "Goods cannot be returned or exchanged",
+  "terms.read": "Please read this before you buy.",
+  "terms.more": "Terms of purchase",
+  "terms.c1.t": "Returns and exchanges",
+  "terms.c1.d": "Purchased goods cannot be returned or exchanged.",
+  "terms.c2.t": "Check at the counter",
+  "terms.c2.d": "Look over the set and its packaging on the spot — our staff will show you anything you'd like to see.",
+  "terms.c3.t": "Taste before you buy",
+  "terms.c3.d": "Not sure what to pick? We'll let you taste and help you choose a flavour and set before you pay.",
+  "terms.fb": "Please note: goods cannot be returned or exchanged."
+});
+Object.assign(I18N.uz, {
+  "terms.label": "Xarid shartlari",
+  "terms.title": "Qaytarish va almashtirish yo‘q",
+  "terms.lead": "Tovarlar qaytarilmaydi va almashtirilmaydi. Xarid qilishdan oldin iltimos, tanishib chiqing.",
+  "terms.short": "Tovarlar qaytarilmaydi va almashtirilmaydi",
+  "terms.read": "Xarid qilishdan oldin iltimos, tanishib chiqing.",
+  "terms.more": "Xarid shartlari",
+  "terms.c1.t": "Qaytarish va almashtirish",
+  "terms.c1.d": "Sotib olingan tovar qaytarilmaydi va almashtirilmaydi.",
+  "terms.c2.t": "Joyida ko‘zdan kechiring",
+  "terms.c2.d": "To‘plam va qadoqni joyida tekshiring — sotuvchi qiziqtirgan hamma narsani ko‘rsatadi.",
+  "terms.c3.t": "Sotib olishdan oldin tatib ko‘ring",
+  "terms.c3.d": "Tanlashda ikkilanyapsizmi? To‘lovdan oldin tatib ko‘rishga beramiz va ta’m hamda to‘plam tanlashga yordam beramiz.",
+  "terms.fb": "Diqqat: tovarlar qaytarilmaydi va almashtirilmaydi."
+});
